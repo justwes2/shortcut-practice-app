@@ -10,17 +10,18 @@ var shortcuts = [
   ['toggle tree view', 'meta \\']
 ];
 
+var prompt = $('#prompt');
 var attempt = '';
 var target = '';
+
+setTarget();
 
 function setTarget() {
   var i = Math.floor(Math.random()*shortcuts.length);
   attempt = '';
   target = shortcuts[i][1];
-  console.log(shortcuts[i][0]);
+  prompt.html(shortcuts[i][0])
 }
-
-setTarget();
 
 $(document).keydown(function(e) {
   if (e.metaKey && e.key === 'r') {
@@ -37,10 +38,16 @@ $(document).keydown(function(e) {
   }
   attempt += e.key.toLowerCase();
   if (attempt === target) {
-    console.log('Yay!');
-    setTarget();
+    prompt.attr('class', 'right');
+    setTimeout(function() {
+      prompt.attr('class', '');
+      setTarget();
+    }, 1000);
   } else {
     attempt = '';
-    console.log('Nope. Try again.');
+    prompt.attr('class', 'wrong');
+    setTimeout(function() {
+      prompt.attr('class', '');
+    }, 1000);
   }
 });

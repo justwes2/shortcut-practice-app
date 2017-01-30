@@ -1,18 +1,46 @@
+var modifiers = ['meta', 'shift', 'ctrl', 'alt']
+
+var shortcuts = [
+  ['toggle comment', 'meta /'],
+  ['duplicate line', 'meta shift d'],
+  ['move line up', 'meta ctrl arrowup'],
+  ['move line down', 'meta ctrl arrowdown'],
+  ['indent', 'meta ]'],
+  ['outdent', 'meta ['],
+  ['toggle tree view', 'meta \\']
+];
+
+var attempt = '';
+var target = '';
+
+function setTarget() {
+  var i = Math.floor(Math.random()*shortcuts.length);
+  attempt = '';
+  target = shortcuts[i][1];
+  console.log(shortcuts[i][0]);
+}
+
+setTarget();
+
 $(document).keydown(function(e) {
+  if (e.metaKey && e.key === 'r') {
+    return;
+  }
   e.preventDefault();
-  if (e.metaKey && e.which === 191) {
-    console.log('toggle comment');
+  if ([16, 17, 18, 91, 93].indexOf(e.which) !== -1) {
+    return;
   }
-  if (e.metaKey && e.which === 221) {
-    console.log('indent');
+  for (var i = 0; i < modifiers.length; i++) {
+    if (e[modifiers[i]+'Key']) {
+      attempt += modifiers[i]+' ';
+    }
   }
-  if (e.metaKey && e.which === 219) {
-    console.log('outdent');
-  }
-  if (e.metaKey && e.shiftKey && e.which === 68) {
-    console.log('duplicate line');
-  }
-  if (e.metaKey && e.which === 220) {
-    console.log('toggle tree view');
+  attempt += e.key.toLowerCase();
+  if (attempt === target) {
+    console.log('Yay!');
+    setTarget();
+  } else {
+    attempt = '';
+    console.log('Nope. Try again.');
   }
 });

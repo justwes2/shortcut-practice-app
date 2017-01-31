@@ -1,5 +1,6 @@
 body {
-  background-color: black;
+  background-color: #222;
+  color: #222;
   text-align: center;
   font-family: sans-serif;
 }
@@ -12,10 +13,10 @@ body {
 }
 
 header {
-  font-family: 'Sansita', sans-serif;
   height: 150px;
-  color: lightblue;
   margin: 15px;
+  font-family: 'Sansita', sans-serif;
+  color: lightblue;
 }
 
 h1 {
@@ -36,7 +37,7 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 
 #prompt {

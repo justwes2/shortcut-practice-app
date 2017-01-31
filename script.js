@@ -14,8 +14,6 @@ var cuts = [
 
 var indexes = [];
 
-fillIndexes();
-
 function fillIndexes() {
   for (var i = 0; i < cuts.length; i++) {
     indexes.push(i);
@@ -23,6 +21,7 @@ function fillIndexes() {
 }
 
 var target;
+var lastIndex;
 a = $('#answer');
 p = $('#prompt');
 
@@ -41,14 +40,13 @@ $(document).keydown(function(e) {
 });
 
 function getTarget() {
-  var i = Math.floor(Math.random()*indexes.length);
-  var j = indexes[i];
-  indexes.splice(i, 1);
-  if (indexes.length === 0) {
-    fillIndexes();
+  var index = Math.floor(Math.random()*cuts.length);
+  if (index === lastIndex) {
+    return getTarget();
   }
-  p.html(cuts[j][0]);
-  target = cuts[j][1];
+  p.html(cuts[index][0]);
+  target = cuts[index][1];
+  lastIndex = index;
 }
 
 function needsHearing(e) {

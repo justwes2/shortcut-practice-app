@@ -4,10 +4,21 @@
     <meta charset="utf-8">
     <title>Shortcuts App</title>
     <link rel="stylesheet" href="reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Sansita:400,700i" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <p id="prompt"></p>
+    <div id="wrapper">
+      <header>
+        <h1>Fission</h1>
+        <h2>Shortcut Practice for Atom</h2>
+      </header>
+      <div id="arena">
+        <p id="prompt"></p>
+        <p id="answer" class="right"></p>
+        <p id="instruction"></p>
+      </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="script.js"></script>
   </body>

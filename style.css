@@ -1,22 +1,62 @@
 body {
   background-color: black;
-  color: white;
-  font-family: sans-serif;
   text-align: center;
+  font-family: sans-serif;
+}
+
+#wrapper {
+  width: 810px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+header {
+  font-family: 'Sansita', sans-serif;
+  height: 150px;
+  color: lightblue;
+  margin: 15px;
+}
+
+h1 {
+  margin-bottom: 15px;
+  font-size: 70px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+#arena {
+  background-color: lightblue;
+  width: 810px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  border-radius: 20px;
 }
 
 #prompt {
-  font-size: 70px;
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+#answer {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+#instruction {
+  font-size: 15px;
 }
 
 .right {
-  color: #2bd882;
+  color: green;
 }
 
 .wrong {
-  color: #d82b2b;
+  color: red;
 }

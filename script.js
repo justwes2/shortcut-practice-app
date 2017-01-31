@@ -1,15 +1,15 @@
 var mods = ['meta', 'shift', 'ctrl', 'alt']
 
 var cuts = [
-  ['indent', 'cmd+]'],
-  ['outdent', 'cmd+['],
-  ['toggle comment', 'cmd+/'],
-  ['toggle tree view', 'cmd+\\'],
-  ['select current word', 'cmd+d'],
-  ['select current line', 'cmd+l'],
-  ['duplicate line', 'cmd+shift+d'],
-  ['move line up', 'cmd+ctrl+arrowup'],
-  ['move line down', 'cmd+ctrl+arrowdown']
+  ['indent', 'cmd+]', 0],
+  ['outdent', 'cmd+[', 0],
+  ['toggle comment', 'cmd+/', 0],
+  ['toggle tree view', 'cmd+\\', 0],
+  ['select current word', 'cmd+d', 0],
+  ['select current line', 'cmd+l', 0],
+  ['duplicate line', 'cmd+shift+d', 0],
+  ['move line up', 'cmd+ctrl+arrowup', 0],
+  ['move line down', 'cmd+ctrl+arrowdown', 0]
 ];
 
 var indexes = [];
@@ -32,7 +32,11 @@ $(document).keydown(function(e) {
     e.preventDefault();
     var input = getInput(e);
     if (input === target) {
-      handleRight();
+      if (p.hasClass('wrong')) {
+        handleCorrected();
+      } else {
+        handleRight();
+      }
     } else {
       handleWrong();
     }
@@ -85,4 +89,13 @@ function handleRight() {
 function handleWrong() {
   p.attr('class', 'wrong');
   a.html(target);
+}
+
+function handleCorrected() {
+  p.attr('class', 'right');
+  setTimeout(function() {
+    p.attr('class', '');
+    a.html('');
+    getTarget();
+  }, 2000);
 }

@@ -26,4 +26,14 @@ Toward the end of the game, getting shortcuts wrong can lead to serious bugs. I 
 
 For now, the app is fairly minimalist. The idea is to add more functionality later when I have learned more about OOP, databases, and Rails or Express.
 
-Some features I would like to add in the future: A persistent database which keeps track of users and their progress. More shortcuts, split into manageable 'sets' of shortcuts. The ability to switch between these 'sets' by clicking tabs to the left of the play area. Shortcuts practice for programs other than Atom. Better colors and typography. Ability to add, remove, and edit shortcuts and sets. Ability to restore default shortcuts and sets. More sophisticated algorithm for choosing next shortcut to test. Ability to (de)prioritize shortcuts if the user is more or less interested in learning them.
+Some features I would like to add in the future ...
+- Better colors and typography.
+- More shortcuts.
+- Shortcuts split into manageable "sets" of shortcuts.
+- The ability to switch between these "sets" by clicking tabs to the left of the play area.
+- Shortcuts practice for programs other than Atom.
+- A persistent database which keeps track of users and their progress.
+- Ability to add, remove, and edit shortcuts and sets.
+- Ability to restore default shortcuts and sets.
+- More sophisticated algorithm for choosing next shortcut to test.
+- Ability to (de)prioritize shortcuts if the user is more or less interested in learning them.

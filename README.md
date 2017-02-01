@@ -10,19 +10,19 @@ HTML, CSS, and jQuery (with some vanilla JavaScript mixed in).
 
 ### Approach taken
 
-A single jQuery keydown listener is the gatekeeper for all of the relevant keyboard input, but it delegates certain duties to other (declared) functions. In earlier iterations, the shortcuts were represented in a two-dimensional array. Now there is a Shortcut class and a shortcuts array which includes every instance of this class.
+A single jQuery keydown listener is the gatekeeper for all of the relevant keyboard input, but it delegates certain duties to other (declared) functions. In earlier iterations, the shortcuts were represented in a two-dimensional array. Now, there is a Shortcut class and a shortcuts array which includes every instance of that class.
 
 ### User stories
 
-As an aspiring web developer, I should be able to learn Atom shortcuts quickly, so that I can finish my projects more efficiently.
+-As an aspiring web developer, I should be able to learn Atom shortcuts quickly, so that I can finish my projects more efficiently.
 
-As someone who simply wants to try the app out, I should be able to dive straight in without wading through sign-up, log-in, or customization.
+-As someone who simply wants to try the app out, I should be able to dive straight in without wading through sign-up, log-in, or customization.
 
-As someone who knows very few of these shortcuts, when I get a shortcut wrong, I should be shown the correct answer, given sufficient time to absorb it, and given an opportunity to echo it back.
+-As someone who knows very few of these shortcuts, when I get a shortcut wrong, I should be shown the correct answer, given sufficient time to absorb it, and given an opportunity to echo it back.
 
-As someone who knows most or all of these shortcuts, when I get a shortcut right, I should be able to move on fairly quickly.
+-As someone who knows most or all of these shortcuts, when I get a shortcut right, I should be able to move on fairly quickly.
 
-As someone who is not sufficiently motivated by individual correct and incorrect answers, I should see a session-score "energy bar" to ignite my competitive and completionist drives.
+-As someone who is not sufficiently motivated by individual correct and incorrect answers, I should see a session-score "energy bar" to ignite my competitive and completionist drives.
 
 ### Unsolved problems
 

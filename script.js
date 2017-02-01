@@ -1,38 +1,53 @@
 var mods = ['meta', 'shift', 'ctrl', 'alt']
 
-var cuts = [
-  ['indent', 'cmd+]', 0],
-  ['outdent', 'cmd+[', 0],
-  ['toggle comment', 'cmd+/', 0],
-  ['toggle tree view', 'cmd+\\', 0],
-  ['select current word', 'cmd+d', 0],
-  ['select current line', 'cmd+l', 0],
-  ['duplicate line', 'cmd+shift+d', 0],
-  ['move line up', 'cmd+ctrl+arrowup', 0],
-  ['move line down', 'cmd+ctrl+arrowdown', 0]
-];
-
-var indexes = [];
-
-function fillIndexes() {
-  for (var i = 0; i < cuts.length; i++) {
-    indexes.push(i);
+class Shortcut {
+  constructor(name, combo) {
+    this.name = name;
+    this.combo = combo;
+    this.score = 0;
   }
 }
 
+var shortcuts = [new Shortcut('indent', 'cmd+]'),
+                 new Shortcut('outdent', 'cmd+['),
+                 new Shortcut('toggle comment', 'cmd+/'),
+                 new Shortcut('toggle tree view', 'cmd+\\'),
+                 new Shortcut('select current word', 'cmd+d'),
+                 new Shortcut('select current line', 'cmd+l'),
+                 new Shortcut('duplicate line', 'cmd+shift+d'),
+                 new Shortcut('move line up', 'cmd+ctrl+arrowup'),
+                 new Shortcut('move line down', 'cmd+ctrl+arrowdown')];
+
+var score;
+var maxScore = shortcuts.length * 3;
+var prompt = $('#prompt');
+var answer = $('#answer');
 var target;
-var lastIndex;
-a = $('#answer');
-p = $('#prompt');
+var i;
 
 getTarget();
+
+function getTarget() {
+  if (score === maxScore) {
+    prompt.html('');
+    answer.html('');
+    target = null;
+  }
+  var j = Math.floor(Math.random()*shortcuts.length);
+  target = shortcuts[j];
+  if (j === i || target.score >= 3) {
+    return getTarget();
+  }
+  prompt.html(target.name)
+  i = j;
+}
 
 $(document).keydown(function(e) {
   if (needsHearing(e)) {
     e.preventDefault();
     var input = getInput(e);
-    if (input === target) {
-      if (p.hasClass('wrong')) {
+    if (input === target.combo) {
+      if (prompt.hasClass('wrong')) {
         handleCorrected();
       } else {
         handleRight();
@@ -40,23 +55,14 @@ $(document).keydown(function(e) {
     } else {
       handleWrong();
     }
+    updateScore();
   }
 });
 
-function getTarget() {
-  var index = Math.floor(Math.random()*cuts.length);
-  if (index === lastIndex) {
-    return getTarget();
-  }
-  p.html(cuts[index][0]);
-  target = cuts[index][1];
-  lastIndex = index;
-}
-
 function needsHearing(e) {
-  if ([16, 17, 18, 91, 93].indexOf(e.which) !== -1) {
-    return false;
-  } else if (e.metaKey && e.key === 'r') {
+  if ([16, 17, 18, 91, 93].indexOf(e.which) !== -1 ||
+      (e.metaKey && e.key === 'r') ||
+      (e.metaKey && e.altKey && e.key === 'j')) {
     return false;
   }
   return true;
@@ -78,24 +84,35 @@ function getInput(e) {
 }
 
 function handleRight() {
-  p.attr('class', 'right');
+  prompt.attr('class', 'right');
+  target.score += 1;
   setTimeout(function() {
-    p.attr('class', '');
-    a.html('');
+    prompt.attr('class', '');
+    answer.html('');
     getTarget();
   }, 1000);
 }
 
 function handleWrong() {
-  p.attr('class', 'wrong');
-  a.html(target);
+  prompt.attr('class', 'wrong');
+  answer.html(target.combo);
+  target.score = 0;
 }
 
 function handleCorrected() {
-  p.attr('class', 'right');
+  prompt.attr('class', 'right');
   setTimeout(function() {
-    p.attr('class', '');
-    a.html('');
+    prompt.attr('class', '');
+    answer.html('');
     getTarget();
-  }, 2000);
+  }, 1000);
+}
+
+function updateScore() {
+  score = 0;
+  for (var k = 0; k < shortcuts.length; k++) {
+    score += shortcuts[k].score;
+  }
+  var width = Math.round(100 * (score / maxScore));
+  $('#liquid').css('width', width+'%');
 }

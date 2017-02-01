@@ -1,26 +1,29 @@
 body {
-  background-color: #222;
-  color: #222;
+  background-color: #20252A;
+  color: #bbb;
   text-align: center;
   font-family: sans-serif;
+}
+
+#wrapper, header, #arena {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #wrapper {
   width: 810px;
   height: 100vh;
   margin: 0 auto;
-  padding: 50px;
 }
 
 header {
-  height: 150px;
-  margin: 15px;
   font-family: 'Sansita', sans-serif;
-  color: lightblue;
+  color: #448E67;
 }
 
 h1 {
-  margin-bottom: 15px;
   font-size: 70px;
   font-style: italic;
   font-weight: bold;
@@ -30,14 +33,26 @@ h2 {
   font-size: 30px;
 }
 
+#vial {
+  width: 540px;
+  height: 40px;
+  margin: 30px 0 30px 0;
+  border: 2px solid #448E67;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#liquid {
+  background-color: #448E67;
+  width: 0%;
+  height: 100%;
+}
+
 #arena {
-  background-color: lightblue;
+  background-color: #282C33;
   width: 810px;
   height: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 #prompt {
@@ -47,17 +62,12 @@ h2 {
 
 #answer {
   font-size: 30px;
-  margin-bottom: 10px;
-}
-
-#instruction {
-  font-size: 15px;
 }
 
 .right {
-  color: green;
+  color: #448E67;
 }
 
 .wrong {
-  color: red;
+  color: #DF6C74;
 }

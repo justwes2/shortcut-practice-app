@@ -23,7 +23,7 @@ var maxScore = shortcuts.length * 3;
 var prompt = $('#prompt');
 var answer = $('#answer');
 var target;
-var i;
+// var i;
 
 getTarget();
 
@@ -35,11 +35,12 @@ function getTarget() {
   }
   var j = Math.floor(Math.random()*shortcuts.length);
   target = shortcuts[j];
-  if (j === i || target.score >= 3) {
+  // (j === i ||
+  if (target.score >= 3) {
     return getTarget();
   }
   prompt.html(target.name);
-  i = j;
+  // i = j;
 }
 
 $(document).keydown(function(e) {

@@ -1,4 +1,4 @@
-var mods = ['meta', 'shift', 'ctrl', 'alt']
+var mods = ['meta', 'shift', 'ctrl', 'alt'];
 
 class Shortcut {
   constructor(name, combo) {
@@ -29,16 +29,16 @@ getTarget();
 
 function getTarget() {
   if (score === maxScore) {
-    prompt.html('');
-    answer.html('');
-    target = null;
+    prompt.html('Yay!').addClass('right');
+    $(document).off();
+    return;
   }
   var j = Math.floor(Math.random()*shortcuts.length);
   target = shortcuts[j];
   if (j === i || target.score >= 3) {
     return getTarget();
   }
-  prompt.html(target.name)
+  prompt.html(target.name);
   i = j;
 }
 
@@ -48,12 +48,12 @@ $(document).keydown(function(e) {
     var input = getInput(e);
     if (input === target.combo) {
       if (prompt.hasClass('wrong')) {
-        handleCorrected();
+        corrected();
       } else {
-        handleRight();
+        right();
       }
     } else {
-      handleWrong();
+      wrong();
     }
     updateScore();
   }
@@ -83,7 +83,7 @@ function getInput(e) {
   return input;
 }
 
-function handleRight() {
+function right() {
   prompt.attr('class', 'right');
   target.score += 1;
   setTimeout(function() {
@@ -93,13 +93,13 @@ function handleRight() {
   }, 1000);
 }
 
-function handleWrong() {
+function wrong() {
   prompt.attr('class', 'wrong');
   answer.html(target.combo);
   target.score = 0;
 }
 
-function handleCorrected() {
+function corrected() {
   prompt.attr('class', 'right');
   setTimeout(function() {
     prompt.attr('class', '');

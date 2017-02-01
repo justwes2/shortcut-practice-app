@@ -1,18 +1,18 @@
 # Fission | Shortcut Practice for Atom
 
-## Installation instructions
+### Installation instructions
 
 You can see the app live at ngcarter.github.io/shortcut-practice-app/, or can run it locally by cloning this repository and opening index.html in your browser.
 
-## Technologies used
+### Technologies used
 
 HTML, CSS, and jQuery (with some vanilla JavaScript mixed in).
 
-## Approach taken
+### Approach taken
 
 A single jQuery keydown listener is the gatekeeper for all of the relevant keyboard input, but it delegates certain duties to other (declared) functions. In earlier iterations, the shortcuts were represented in a two-dimensional array. Now there is a Shortcut class and a shortcuts array which includes every instance of this class.
 
-## User stories
+### User stories
 
 As an aspiring web developer, I should be able to learn Atom shortcuts quickly, so that I can finish my projects more efficiently.
 
@@ -24,7 +24,7 @@ As someone who knows most or all of these shortcuts, when I get a shortcut right
 
 As someone who is not sufficiently motivated by individual correct and incorrect answers, I should see a session-score "energy bar" to ignite my competitive and completionist drives.
 
-## Unsolved problems
+### Unsolved problems
 
 Toward the end of the game, getting shortcuts wrong can lead to serious bugs. I think this has something to do with how I (a) prevent mastered shortcuts from repeating, and (b) prevent the same shortcut from repeating twice in a row. My hypothesis is that a conflict between these provisions is leading to strange behavior, but I have yet to get to the bottom of this.
 

@@ -2,7 +2,7 @@
 
 ### Installation instructions
 
-You can see the app live at ngcarter.github.io/shortcut-practice-app/, or can run it locally by cloning this repository and opening index.html in your browser.
+You can see the app live [here](ngcarter.github.io/shortcut-practice-app/), or you can run it locally by cloning this repository and opening index.html in your browser.
 
 ### Technologies used
 
@@ -22,7 +22,7 @@ A single jQuery keydown listener is the gatekeeper for all of the relevant keybo
 
 ### Unsolved problems
 
-Toward the end of the game, getting shortcuts wrong can lead to serious bugs. I think this has something to do with how I (a) prevent mastered shortcuts from repeating, and (b) prevent the same shortcut from repeating twice in a row. My hypothesis is that a conflict between these provisions is leading to strange behavior, but I have yet to get to the bottom of this.
+Fixed: ~~Toward the end of the game, getting shortcuts wrong can lead to serious bugs. I think this has something to do with how I (a) prevent mastered shortcuts from repeating, and (b) prevent the same shortcut from repeating twice in a row. My hypothesis is that a conflict between these provisions is leading to strange behavior, but I have yet to get to the bottom of this.~~
 
 For now, the app is fairly minimalist. The idea is to add more functionality later when I have learned more about OOP, databases, and Rails or Express.
 

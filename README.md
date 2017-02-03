@@ -2,7 +2,7 @@
 
 ### Installation instructions
 
-You can see the app live [here](ngcarter.github.io/shortcut-practice-app/), or you can run it locally by cloning this repository and opening index.html in your browser.
+You can see the app live [here](https://ngcarter.github.io/shortcut-practice-app/), or you can run it locally by cloning this repository and opening index.html in your browser.
 
 ### Technologies used
 

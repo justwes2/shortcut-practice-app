@@ -27,6 +27,10 @@ Fixed: ~~Toward the end of the game, getting shortcuts wrong can lead to serious
 For now, the app is fairly minimalist. The idea is to add more functionality later when I have learned more about OOP, databases, and Rails or Express.
 
 Some features I would like to add in the future ...
+- Tutorial/instructions
+- 'Show answer' button (people are extremely hesitant to guess when they have no clue, it turns out)
+- Warning not to press 'cmd+q', 'cmd+w', 'cmd+t', and other combinations which resist preventDefault().
+- Clarify that the way to move on after a wrong answer is to echo back the right answer.
 - Better colors and typography.
 - More shortcuts.
 - Shortcuts split into manageable "sets" of shortcuts.

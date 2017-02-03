@@ -122,7 +122,3 @@ function needsHearing(e) {
   }
   return true;
 }
-
-
-added back prevention of same shortcut twice in a row
-combined right() and corrected() functions to avoid repetition and adjusted keydown listener accordingly

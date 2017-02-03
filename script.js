@@ -1,46 +1,54 @@
 var mods = ['meta', 'shift', 'ctrl', 'alt'];
 
-class Shortcut {
+class Cut {
   constructor(name, combo) {
     this.name = name;
     this.combo = combo;
     this.score = 0;
+    this.priority = 8;
+    this.max = 0;
   }
 }
 
-var shortcuts = [new Shortcut('indent', 'cmd+]'),
-                 new Shortcut('outdent', 'cmd+['),
-                 new Shortcut('toggle comment', 'cmd+/'),
-                 new Shortcut('toggle tree view', 'cmd+\\'),
-                 new Shortcut('select current word', 'cmd+d'),
-                 new Shortcut('select current line', 'cmd+l'),
-                 new Shortcut('duplicate line', 'cmd+shift+d'),
-                 new Shortcut('move line up', 'cmd+ctrl+arrowup'),
-                 new Shortcut('move line down', 'cmd+ctrl+arrowdown')];
+var cuts = [new Cut('indent', 'cmd+]'),
+            new Cut('outdent', 'cmd+['),
+            new Cut('toggle comment', 'cmd+/'),
+            new Cut('toggle tree view', 'cmd+\\'),
+            new Cut('select current word', 'cmd+d'),
+            new Cut('select current line', 'cmd+l'),
+            new Cut('duplicate line', 'cmd+shift+d'),
+            new Cut('move line up', 'cmd+ctrl+arrowup'),
+            new Cut('move line down', 'cmd+ctrl+arrowdown')];
 
-var score;
-var maxScore = shortcuts.length * 3;
+var totalScore = 0;
+var totalPriority = 72;
+var maxScore = cuts.length * 3;
 var prompt = $('#prompt');
 var answer = $('#answer');
 var target;
-// var i;
+var lastTarget;
 
 getTarget();
 
 function getTarget() {
-  if (score === maxScore) {
+  if (totalScore === maxScore) {
     prompt.html('Yay!').addClass('right');
     $(document).off();
     return;
   }
-  var j = Math.floor(Math.random()*shortcuts.length);
-  target = shortcuts[j];
-  // (j === i ||
-  if (target.score >= 3) {
+  getMaxes();
+  var rando = Math.random();
+  for (var i = 0; i < cuts.length; i++) {
+    if (rando < cuts[i].max) {
+      target = cuts[i];
+      break;
+    }
+  }
+  if (target === lastTarget) {
     return getTarget();
   }
   prompt.html(target.name);
-  // i = j;
+  lastTarget = target;
 }
 
 $(document).keydown(function(e) {
@@ -48,26 +56,14 @@ $(document).keydown(function(e) {
     e.preventDefault();
     var input = getInput(e);
     if (input === target.combo) {
-      if (prompt.hasClass('wrong')) {
-        corrected();
-      } else {
-        right();
-      }
+      right();
     } else {
       wrong();
     }
-    updateScore();
+    var width = Math.round(100 * (totalScore / maxScore));
+    $('#liquid').css('width', width+'%');
   }
 });
-
-function needsHearing(e) {
-  if ([16, 17, 18, 91, 93].indexOf(e.which) !== -1 ||
-      (e.metaKey && e.key === 'r') ||
-      (e.metaKey && e.altKey && e.key === 'j')) {
-    return false;
-  }
-  return true;
-}
 
 function getInput(e) {
   var input = '';
@@ -85,8 +81,13 @@ function getInput(e) {
 }
 
 function right() {
+  if (prompt.attr('class') === '') {
+    totalScore++;
+    target.score++;
+    totalPriority -= (target.priority / 2);
+    target.priority /= 2;
+  }
   prompt.attr('class', 'right');
-  target.score += 1;
   setTimeout(function() {
     prompt.attr('class', '');
     answer.html('');
@@ -97,23 +98,31 @@ function right() {
 function wrong() {
   prompt.attr('class', 'wrong');
   answer.html(target.combo);
+  totalScore -= target.score;
   target.score = 0;
+  totalPriority += (8 - target.priority);
+  target.priority = 8;
 }
 
-function corrected() {
-  prompt.attr('class', 'right');
-  setTimeout(function() {
-    prompt.attr('class', '');
-    answer.html('');
-    getTarget();
-  }, 1000);
-}
-
-function updateScore() {
-  score = 0;
-  for (var k = 0; k < shortcuts.length; k++) {
-    score += shortcuts[k].score;
+function getMaxes() {
+  var step = 0;
+  for (var i = 0; i < cuts.length; i++) {
+    var cut = cuts[i];
+    var ratio = cut.priority / totalPriority;
+    cut.max = step + ratio;
+    step += ratio;
   }
-  var width = Math.round(100 * (score / maxScore));
-  $('#liquid').css('width', width+'%');
 }
+
+function needsHearing(e) {
+  if ([16, 17, 18, 91, 93].indexOf(e.which) !== -1 ||
+      (e.metaKey && e.key === 'r') ||
+      (e.metaKey && e.altKey && e.key === 'j')) {
+    return false;
+  }
+  return true;
+}
+
+
+added back prevention of same shortcut twice in a row
+combined right() and corrected() functions to avoid repetition and adjusted keydown listener accordingly

@@ -27,6 +27,8 @@ Fixed: ~~Toward the end of the game, getting shortcuts wrong can lead to serious
 For now, the app is fairly minimalist. The idea is to add more functionality later when I have learned more about OOP, databases, and Rails or Express.
 
 Some features I would like to add in the future ...
+- Figure out why it doesn't work in Safari.
+- Check functionality in other non-Chrome browsers.
 - Tutorial/instructions
 - 'Show answer' button (people are extremely hesitant to guess when they have no clue, it turns out)
 - Warning not to press 'cmd+q', 'cmd+w', 'cmd+t', and other combinations which resist preventDefault().

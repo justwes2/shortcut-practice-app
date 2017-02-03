@@ -81,7 +81,7 @@ function getInput(e) {
 }
 
 function right() {
-  if (prompt.attr('class') === '') {
+  if (!prompt.hasClass('wrong')) {
     totalScore++;
     target.score++;
     totalPriority -= (target.priority / 2);

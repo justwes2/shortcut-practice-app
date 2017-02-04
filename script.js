@@ -1,5 +1,3 @@
-var mods = ['meta', 'shift', 'ctrl', 'alt'];
-
 class Cut {
   constructor(name, combo) {
     this.name = name;
@@ -10,23 +8,25 @@ class Cut {
   }
 }
 
-var cuts = [new Cut('indent', 'cmd+]'),
-            new Cut('outdent', 'cmd+['),
-            new Cut('toggle comment', 'cmd+/'),
-            new Cut('toggle tree view', 'cmd+\\'),
-            new Cut('select current word', 'cmd+d'),
-            new Cut('select current line', 'cmd+l'),
-            new Cut('duplicate line', 'cmd+shift+d'),
-            new Cut('move line up', 'cmd+ctrl+arrowup'),
-            new Cut('move line down', 'cmd+ctrl+arrowdown')];
+const cuts = [new Cut('indent', 'cmd+]'),
+              new Cut('outdent', 'cmd+['),
+              new Cut('toggle comment', 'cmd+/'),
+              new Cut('toggle tree view', 'cmd+\\'),
+              new Cut('select current word', 'cmd+d'),
+              new Cut('select current line', 'cmd+l'),
+              new Cut('duplicate line', 'cmd+shift+d'),
+              new Cut('move line up', 'cmd+ctrl+arrowup'),
+              new Cut('move line down', 'cmd+ctrl+arrowdown')];
 
-var totalScore = 0;
-var totalPriority = 72;
-var maxScore = cuts.length * 3;
-var prompt = $('#prompt');
-var answer = $('#answer');
-var target;
-var lastTarget;
+const mods = ['meta', 'shift', 'ctrl', 'alt'];
+const prompt = $('#prompt');
+const answer = $('#answer');
+const maxScore = cuts.length * 3;
+
+let totalScore = 0;
+let totalPriority = 72;
+let target;
+let lastTarget;
 
 getTarget();
 
@@ -37,9 +37,9 @@ function getTarget() {
     return;
   }
   getMaxes();
-  var rando = Math.random();
+  let random = Math.random();
   for (var i = 0; i < cuts.length; i++) {
-    if (rando < cuts[i].max) {
+    if (random < cuts[i].max) {
       target = cuts[i];
       break;
     }
@@ -105,13 +105,12 @@ function wrong() {
 }
 
 function getMaxes() {
-  var step = 0;
-  for (var i = 0; i < cuts.length; i++) {
-    var cut = cuts[i];
-    var ratio = cut.priority / totalPriority;
+  let step = 0;
+  cuts.forEach((cut) => {
+    let ratio = cut.priority / totalPriority;
     cut.max = step + ratio;
     step += ratio;
-  }
+  });
 }
 
 function needsHearing(e) {

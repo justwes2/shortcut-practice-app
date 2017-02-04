@@ -38,7 +38,7 @@ function getTarget() {
   }
   getMaxes();
   let random = Math.random();
-  for (var i = 0; i < cuts.length; i++) {
+  for (let i in cuts) {
     if (random < cuts[i].max) {
       target = cuts[i];
       break;
@@ -54,13 +54,13 @@ function getTarget() {
 $(document).keydown(function(e) {
   if (needsHearing(e)) {
     e.preventDefault();
-    var input = getInput(e);
+    let input = getInput(e);
     if (input === target.combo) {
       right();
     } else {
       wrong();
     }
-    var width = Math.round(100 * (totalScore / maxScore));
+    let width = Math.round(100 * (totalScore / maxScore));
     $('#liquid').css('width', width+'%');
   }
 });

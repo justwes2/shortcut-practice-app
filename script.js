@@ -67,15 +67,14 @@ $(document).keydown(function(e) {
 
 function getInput(e) {
   var input = '';
-  for (var i = 0; i < mods.length; i++) {
-    var mod = mods[i];
+  mods.forEach((mod) => {
     if (e[mod+'Key']) {
       if (mod === 'meta') {
         mod = 'cmd';
       }
       input += mod+'+';
     }
-  }
+  });
   input += e.key.toLowerCase();
   return input;
 }

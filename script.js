@@ -51,21 +51,16 @@ function getTarget() {
   lastTarget = target;
 }
 
-$(document).keydown(function(e) {
+$(document).keydown((e) => {
   if (needsHearing(e)) {
     e.preventDefault();
-    let input = getInput(e);
-    if (input === target.combo) {
-      right();
-    } else {
-      wrong();
-    }
+    input(e) === target.combo ? right() : wrong()
     updateScore();
   }
 });
 
-function getInput(e) {
-  var input = '';
+function input(e) {
+  let input = '';
   mods.forEach((mod) => {
     if (e[mod+'Key']) {
       if (mod === 'meta') {
@@ -84,7 +79,7 @@ function right() {
     target.priority /= 2;
   }
   prompt.attr('class', 'right');
-  setTimeout(function() {
+  setTimeout(() => {
     prompt.attr('class', '');
     answer.html('');
     getTarget();

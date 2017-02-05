@@ -60,8 +60,7 @@ $(document).keydown(function(e) {
     } else {
       wrong();
     }
-    let width = Math.round(100 * (totalScore / maxScore));
-    $('#liquid').css('width', width+'%');
+    updateScore();
   }
 });
 
@@ -81,9 +80,7 @@ function getInput(e) {
 
 function right() {
   if (!prompt.hasClass('wrong')) {
-    totalScore++;
-    target.score++;
-    totalPriority -= (target.priority / 2);
+    target.score += 1;
     target.priority /= 2;
   }
   prompt.attr('class', 'right');
@@ -97,9 +94,7 @@ function right() {
 function wrong() {
   prompt.attr('class', 'wrong');
   answer.html(target.combo);
-  totalScore -= target.score;
   target.score = 0;
-  totalPriority += (8 - target.priority);
   target.priority = 8;
 }
 
@@ -119,4 +114,15 @@ function needsHearing(e) {
     return false;
   }
   return true;
+}
+
+function updateScore() {
+  totalScore = 0;
+  totalPriority = 72;
+  cuts.forEach((cut) => {
+    totalScore += cut.score;
+    totalPriority += cut.priority;
+  });
+  let width = Math.round(100 * (totalScore / maxScore));
+  $('#liquid').css('width', width+'%');
 }
